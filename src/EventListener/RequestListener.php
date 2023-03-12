@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Exception\InvalidContentType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class RequestListener
@@ -21,7 +22,9 @@ class RequestListener
             throw new InvalidContentType('Invalid request content type');
         }
 
-        if ($request->getContent() != null) {
+        if ($request->getMethod() === Request::METHOD_GET) {
+            $request->request->replace($request->query->all());
+        } else if (!empty($request->getContent())) {
             $data = json_decode($request->getContent(), true);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 throw new \JsonException('Invalid JSON data');

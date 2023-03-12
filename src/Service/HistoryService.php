@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\History;
 use App\Repository\HistoryRepository;
+use App\Strategy\GetDataStrategyInterface;
 
 class HistoryService
 {
@@ -11,9 +12,9 @@ class HistoryService
     {
     }
 
-    public function getAll(): array
+    public function getAll(GetDataStrategyInterface $strategy): array
     {
-        return $this->historyRepository->findAll();
+        return $strategy->getData($this->historyRepository);
     }
 
     public function add(int $first, int $second): History
