@@ -30,7 +30,7 @@ class ExchangeValuesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'allow_extra_fields' => false
+            'allow_extra_fields' => false,
         ]);
     }
 }
