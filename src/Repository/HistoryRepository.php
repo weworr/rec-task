@@ -19,4 +19,13 @@ class HistoryRepository extends ServiceEntityRepository
         $this->_em->persist($history);
         $this->_em->flush();
     }
+
+    public function findAll()
+    {
+        $qb = $this->createQueryBuilder('q');
+
+        return $qb
+            ->getQuery()
+            ->getArrayResult();
+    }
 }

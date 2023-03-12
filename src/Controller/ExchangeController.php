@@ -42,8 +42,7 @@ class ExchangeController extends AbstractController
             $historyService->update($history);
 
             $response
-                ->setData(['Status' => 'OK'])
-                ->setStatusCode(Response::HTTP_OK);
+                ->setData(['Status' => 'OK']);
         } else {
             $errors = $errorService->getFormErrors($form);
 
@@ -53,5 +52,12 @@ class ExchangeController extends AbstractController
         }
 
         return $response;
+    }
+
+    #[Route('/get', methods: ['POST', 'GET'])]
+    public function list(HistoryService $historyService): JsonResponse
+    {
+        $data = $historyService->getAll();
+        return new JsonResponse($data);
     }
 }

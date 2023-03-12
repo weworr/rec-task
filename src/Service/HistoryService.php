@@ -11,6 +11,11 @@ class HistoryService
     {
     }
 
+    public function getAll(): array
+    {
+        return $this->historyRepository->findAll();
+    }
+
     public function add(int $first, int $second): History
     {
         $history = new History();
