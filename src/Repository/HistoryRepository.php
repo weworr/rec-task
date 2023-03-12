@@ -13,4 +13,10 @@ class HistoryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, History::class);
     }
+
+    public function flush(History $history): void
+    {
+        $this->_em->persist($history);
+        $this->_em->flush();
+    }
 }
